@@ -8,12 +8,57 @@
 
 #import "AppDelegate.h"
 
+//包含4个视图控制器的头文件
+#import "ViewController.h"
+#import "ViewController1.h"
+#import "ViewController2.h"
+#import "ViewController3.h"
+
 @implementation AppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    //创建并初始化UITabBarController
+    UITabBarController *tabBarController = [[UITabBarController alloc]init];
+    self.window.rootViewController = tabBarController;
+    
+    //初始化4个视图控制器
+    ViewController *vc = [[ViewController alloc]init];
+    ViewController1 *vc1 = [[ViewController1 alloc]init];
+    ViewController2 *vc2 = [[ViewController2 alloc]init];
+    ViewController3 *vc3 = [[ViewController3 alloc]init];
+    
+    //为4个视图控制器添加导航栏控制器
+    UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:vc];
+    UINavigationController *navC1 = [[UINavigationController alloc]initWithRootViewController:vc1];
+    UINavigationController *navC2 = [[UINavigationController alloc]initWithRootViewController:vc2];
+    UINavigationController *navC3 = [[UINavigationController alloc]initWithRootViewController:vc3];
+    
+    //设置标题
+    navC.title = @"页面";
+    navC1.title = @"页面1";
+    navC2.title = @"页面2";
+    navC3.title = @"页面3";
+    
+    //设置图片
+    navC.tabBarItem.image = [UIImage imageNamed:@"1"];
+    navC1.tabBarItem.image = [UIImage imageNamed:@"2"];
+    navC2.tabBarItem.image = [UIImage imageNamed:@"3"];
+    navC3.tabBarItem.image = [UIImage imageNamed:@"4"];
+    
+    
+    //创建一个数组包含4个导航栏控制器
+    NSArray *controllers = [NSArray arrayWithObjects:navC,navC1,navC2,navC3, nil];
+    
+    //将数组传给UITabBarController
+    tabBarController.viewControllers = controllers;
+    
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
